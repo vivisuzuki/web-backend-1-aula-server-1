@@ -17,3 +17,5 @@ Trabalho com CRUD (Create, Read, Update, Delete) de dados em memória, onde para
 Divisão e configuração das rotas dos servidores em arquivos diferentes utilizando o Router do express.
 
 Criação e utilização de próprios middlewares (globais e locais)
+
+Criação de erro handler

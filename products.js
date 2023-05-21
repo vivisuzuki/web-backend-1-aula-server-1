@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const NotFoundError = require("./NotFoundError")
 
 let products = [
     {id: 1, name: "ps5", price: 5000},
@@ -32,14 +33,15 @@ router.post("/products", withAuth, (req, res) =>{
 
 router.put("/products/:id", (req, res)=>{ //id passando como parâmetro variável no endereço
     const id = Number(req.params.id); //parâmetro vem como string e precisa ser convertido como número
-    products.forEach(product=>{
-        if(product.id === id) {
-            product.name = req.body.name;
-            product.price = req.body.price;
-        }
-    })
+    const product = products.find(product=>{
+            return (product.id === id);
+        });
+    if (!product) throw new NotFoundError("product")
+    product.name = req.body.name;
+    product.price = req.body.price;
     res.json({status: "ok"});
-});
+ });
+
 
 
 router.delete("/products/:id", (req, res)=>{

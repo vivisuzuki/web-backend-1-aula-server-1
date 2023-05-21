@@ -1,5 +1,6 @@
 const express = require("express"); //importando o módulo
 const productRouter = require("./products"); //importando a rota dos produtos
+const NotFoundError = require("./NotFoundError");
 
 const server = express(); //intanciando o módulo
 
@@ -15,5 +16,17 @@ server.use(productRouter); //configurando o servidor para utilizar a rota dos pr
 server.get("/", (req, res)=> {
     res.send("Hello World!!!!");
 }); //configurando um get para página principal /
+
+server.use((err, req, res, next) =>{
+    console.error(">>>>> " + err);
+    next(err);
+})
+
+
+server.use((err, req, res, next) =>{
+    if (err instanceof NotFoundError) return res.status(404).json({message: err.message});
+    res.status(500).json({message: "Internal Server Error"});
+})
+
 
 module.exports = server;
