@@ -11,3 +11,4 @@ Configuração de arquivo de .gitgnore para não subir para o repositório remot
 
 Configuração e utilização de scripts.
 
+Trabalho com CRUD (Create, Read, Update, Delete) de dados em memória, onde para realizar os testes das requisições utilizou-se o software INSOMNIA. 
